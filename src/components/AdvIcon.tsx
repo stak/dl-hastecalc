@@ -1,5 +1,5 @@
 import React from 'react'
-import { Adv } from './types'
+import { Adv } from '../types'
 
 const FULL_SIZE = 160
 

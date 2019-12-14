@@ -1,6 +1,6 @@
 import React from 'react'
 import SelectorResult from './SelectorResult'
-import { Adv } from './types'
+import { Adv } from '../types'
 
 type Props = {
   all: Adv[]
@@ -9,16 +9,16 @@ type Props = {
 
 const SelectorResults: React.FC<Props> = ({ all, onChange }) => {
   return (
-    <div className="SelectorResults">
-      選べ
-      <ul>
-        {all.map(adv => (
-          <button onClick={() => onChange(adv)}>
-            <SelectorResult adv={adv} />
-          </button>
-        ))}
-      </ul>
-    </div>
+    <ul className="SelectorResults">
+      {all.map(adv => (
+        <button
+          key={adv.name + adv.elemental + adv.weapon}
+          onClick={() => onChange(adv)}
+        >
+          <SelectorResult adv={adv} />
+        </button>
+      ))}
+    </ul>
   )
 }
 

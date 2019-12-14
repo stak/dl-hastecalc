@@ -1,7 +1,6 @@
 import React from 'react'
-import { Adv } from './types'
+import { Adv } from '../types'
 import AdvIcon from './AdvIcon'
-import './SelectorResult.css'
 
 type Props = {
   adv: Adv

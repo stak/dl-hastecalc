@@ -13,7 +13,7 @@ type Props = {
 const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
   return (
     <div className="ConfigArea">
-      <input id="totalHaste" type="text" value={config.haste} />
+      <input id="totalHaste" type="text" value={config.haste} readOnly />
       <button
         onClick={() => {
           setConfig(prev => ({ ...prev, haste: prev.haste + 1 }))

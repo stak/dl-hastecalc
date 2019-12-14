@@ -1,5 +1,6 @@
 import React from 'react'
 import { Adv } from './types'
+import AdvIcon from './AdvIcon'
 import './SelectorResult.css'
 
 type Props = {
@@ -8,14 +9,9 @@ type Props = {
 
 const SelectorResult: React.FC<Props> = ({ adv }) => {
   return (
-    <li className="SelectorResult">
-      <img
-        src={`${process.env.PUBLIC_URL}/img/adv/${adv.img}`}
-        width="80"
-        height="80"
-        alt={adv.name}
-      />
-    </li>
+    <div className="SelectorResult">
+      <AdvIcon adv={adv} size={80} />
+    </div>
   )
 }
 

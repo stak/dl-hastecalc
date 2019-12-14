@@ -1,15 +1,16 @@
 import React from 'react'
 import { Adv } from '../types'
 import AdvIcon from './AdvIcon'
+import './AdvArea.css'
 
 type Props = {
   adv: Adv
   size?: number
 }
 
-const AdvData: React.FC<Props> = ({ adv }) => {
+const AdvArea: React.FC<Props> = ({ adv }) => {
   return (
-    <div className="AdvData">
+    <div className="AdvArea">
       <div style={{ float: 'left' }}>
         <AdvIcon adv={adv} />
       </div>
@@ -26,4 +27,4 @@ const AdvData: React.FC<Props> = ({ adv }) => {
   )
 }
 
-export default AdvData
+export default AdvArea

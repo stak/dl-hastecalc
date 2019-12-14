@@ -4,7 +4,7 @@ import { Adv } from '../types'
 
 type Props = {
   all: Adv[]
-  onChange: (adv: Adv) => void
+  onChange: React.Dispatch<React.SetStateAction<Adv>>
 }
 
 const SelectorResults: React.FC<Props> = ({ all, onChange }) => {

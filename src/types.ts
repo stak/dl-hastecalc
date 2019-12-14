@@ -23,3 +23,13 @@ export interface Adv {
   }
   haste: number
 }
+
+export interface Config {
+  prep: number
+  haste: number
+  hasteFS: number
+  useFS: boolean
+  useFSC: boolean
+  latencyFS: number
+  latencyFSC: number
+}

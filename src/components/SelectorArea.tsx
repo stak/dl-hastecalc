@@ -5,7 +5,7 @@ import './SelectorArea.css'
 
 type Props = {
   all: Adv[]
-  onChange: (adv: Adv) => void
+  onChange: React.Dispatch<React.SetStateAction<Adv>>
 }
 
 const SelectorArea: React.FC<Props> = ({ all, onChange }) => {

@@ -1,7 +1,9 @@
 .ConfigArea {
   border: #afa;
+  text-align: 'center';
 }
 
-.AdvData {
-  text-align: left;
+.ConfigArea input, .ConfigArea button {
+  width: 32px;
+  font-size: 18px;
 }

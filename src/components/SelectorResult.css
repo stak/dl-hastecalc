@@ -1,0 +1,23 @@
+.SelectorResults {
+  border: 1px solid #fcc;
+}
+
+.SelectorResults ul {
+  border: 1px solid #ccc;
+  overflow-y: scroll;
+}
+
+.SelectorResults button {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.SelectorResult {
+  list-style: none;
+  margin: 0;
+}
+
+.SelectorResult img {
+  border: 0;
+}

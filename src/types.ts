@@ -43,43 +43,8 @@ export interface Config {
 }
 
 export interface ComboBase {
-  x1: {
+  [key: string]: {
     sp: number
-    startup: number
-    recovery: number
-  }
-  x2: {
-    sp: number
-    startup: number
-    recovery: number
-  }
-  x3: {
-    sp: number
-    startup: number
-    recovery: number
-  }
-  x4: {
-    sp: number
-    startup: number
-    recovery: number
-  }
-  x5: {
-    sp: number
-    startup: number
-    recovery: number
-  }
-  fs: {
-    sp: number
-    startup: number
-    recovery: number
-  }
-  fsf: {
-    sp: 0
-    startup: number
-    recovery: number
-  }
-  dodge: {
-    sp: 0
     startup: number
     recovery: number
   }

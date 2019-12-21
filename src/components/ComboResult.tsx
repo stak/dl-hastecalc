@@ -8,7 +8,8 @@ type Props = {
 const ComboResult: React.FC<Props> = ({ result }) => {
   return (
     <div className="ComboResult">
-      <div>{result.str}</div>total: {result.time} frames
+      <div>{result.str}</div>
+      <div>total: {result.time} frames</div>
     </div>
   )
 }

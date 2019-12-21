@@ -37,9 +37,9 @@ export interface Config {
   haste: number
   hasteFS: number
   useFS: boolean
-  useFSC: boolean
+  useFSF: boolean
   latencyFS: number
-  latencyFSC: number
+  latencyFSF: number
 }
 
 export interface ComboBase {

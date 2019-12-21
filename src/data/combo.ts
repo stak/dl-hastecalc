@@ -76,7 +76,7 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fsf: {
       sp: 0,
-      startup: 0,
+      startup: 23,
       recovery: 33
     },
     dodge: {

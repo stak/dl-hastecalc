@@ -15,9 +15,9 @@ const initialConfig: Config = {
   haste: 0,
   hasteFS: 0,
   useFS: true,
-  useFSC: true,
+  useFSF: true,
   latencyFS: 0,
-  latencyFSC: 0
+  latencyFSF: 0
 }
 
 const App: React.FC = () => {

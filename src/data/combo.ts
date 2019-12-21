@@ -34,8 +34,8 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 30 // TODO:
+      startup: 16,
+      recovery: 21
     },
     dodge: {
       sp: 0,
@@ -113,13 +113,13 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fs: {
       sp: 288,
-      startup: 54,
-      recovery: 14
+      startup: 38,
+      recovery: 30
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 30 // TODO:
+      startup: 28,
+      recovery: 24
     },
     dodge: {
       sp: 0,
@@ -155,13 +155,13 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fs: {
       sp: 400,
-      startup: 49,
-      recovery: 25
+      startup: 41,
+      recovery: 33
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 35
+      startup: 31,
+      recovery: 27
     },
     dodge: {
       sp: 0,
@@ -202,8 +202,8 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 41
+      startup: 23,
+      recovery: 22
     },
     dodge: {
       sp: 0,
@@ -239,13 +239,13 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fs: {
       sp: 460,
-      startup: 63,
-      recovery: 37 // TODO: check roll fs
+      startup: 63, // charge 46f, launch 30f, hit 42f
+      recovery: 37
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 32
+      startup: 21,
+      recovery: 23
     },
     dodge: {
       sp: 0,
@@ -286,8 +286,8 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 29
+      startup: 25,
+      recovery: 22
     },
     dodge: {
       sp: 0,
@@ -328,8 +328,8 @@ const weaponCombo: { [key: string]: ComboBase } = {
     },
     fsf: {
       sp: 0,
-      startup: 0,
-      recovery: 40
+      startup: 21,
+      recovery: 23
     },
     dodge: {
       sp: 0,

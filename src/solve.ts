@@ -50,8 +50,8 @@ function makeFsfCombo(base: ComboBase, config: Config): ComboCandidate[] {
 
   return makeStdCombo(base).map((combo, i) => {
     const rollLatency =
-      i * FRAME_TO_ROLL + base.fsf.startup > combo.before
-        ? i * FRAME_TO_ROLL + base.fsf.startup - combo.before
+      (i + 1) * FRAME_TO_ROLL + base.fsf.startup > combo.before
+        ? (i + 1) * FRAME_TO_ROLL + base.fsf.startup - combo.before
         : 0
     return {
       ...combo,
@@ -62,12 +62,38 @@ function makeFsfCombo(base: ComboBase, config: Config): ComboCandidate[] {
   })
 }
 
+function makeFsCombo(base: ComboBase, config: Config): ComboCandidate[] {
+  /*
+   tap                         x1
+    |<------x1.startup-------->|<----rollLatency---->|
+    |<--FRAME_TO_ROLL-->|<--------fs.startup-------->|<-latencyFS-><---fs.recovery--->|
+                       tap and hold                 release(fs)
+  */
+
+  return makeStdCombo(base).map((combo, i) => {
+    const rollLatency =
+      (i + 1) * FRAME_TO_ROLL + base.fs.startup > combo.before
+        ? (i + 1) * FRAME_TO_ROLL + base.fs.startup - combo.before
+        : 0
+    return {
+      str: combo.str + 'fs',
+      actions: [...combo.actions, 'fs'],
+      before: combo.before + rollLatency + config.latencyFS + 1,
+      after: base.fs.recovery,
+      gain: combo.gain + base.fs.sp
+    }
+  })
+}
+
 export function solveFastestComboToSP(sp: number, config: Config): ComboData {
   const baseData = weaponCombos[config.weapon]
   let combos: ComboCandidate[] = []
   combos = [...combos, ...makeStdCombo(baseData)]
   if (config.useFSF) {
     combos = [...combos, ...makeFsfCombo(baseData, config)]
+  }
+  if (config.useFS) {
+    combos = [...combos, ...makeFsCombo(baseData, config)]
   }
   console.log(combos)
 

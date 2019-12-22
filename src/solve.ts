@@ -85,15 +85,37 @@ function makeFsCombo(base: ComboBase, config: Config): ComboCandidate[] {
   })
 }
 
+function addHaste(base: ComboBase, config: Config): ComboBase {
+  const hasted: ComboBase = {}
+  const actions: Action[] = ['x1', 'x2', 'x3', 'x4', 'x5', 'fs']
+
+  for (let [k, v] of Object.entries(base)) {
+    if (actions.find(a => a === k)) {
+      const composedHaste =
+        k !== 'fs' ? config.haste : config.haste + config.hasteFS
+
+      hasted[k] = {
+        ...v,
+        sp: Math.ceil((v.sp * (100 + composedHaste)) / 100)
+      }
+    } else {
+      hasted[k] = v
+    }
+  }
+
+  return hasted
+}
+
 export function solveFastestComboToSP(sp: number, config: Config): ComboData {
   const baseData = weaponCombos[config.weapon]
+  const hastedData = addHaste(baseData, config)
   let combos: ComboCandidate[] = []
-  combos = [...combos, ...makeStdCombo(baseData)]
+  combos = [...combos, ...makeStdCombo(hastedData)]
   if (config.useFSF) {
-    combos = [...combos, ...makeFsfCombo(baseData, config)]
+    combos = [...combos, ...makeFsfCombo(hastedData, config)]
   }
   if (config.useFS) {
-    combos = [...combos, ...makeFsCombo(baseData, config)]
+    combos = [...combos, ...makeFsCombo(hastedData, config)]
   }
   console.log(combos)
 

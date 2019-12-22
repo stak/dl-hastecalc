@@ -1,4 +1,4 @@
-export type Elemental = 'flame' | 'water' | 'wind' | 'light' | 'shadow'
+export type Element = 'flame' | 'water' | 'wind' | 'light' | 'shadow'
 
 export type Weapon =
   | 'sword'
@@ -13,21 +13,23 @@ export type Weapon =
 export type Action = 'x1' | 'x2' | 'x3' | 'x4' | 'x5' | 'fs' | 'fsf' | 'dodge'
 
 export interface Adv {
-  name: string
+  ja: string
+  en: string
   img: string
-  elemental: Elemental
+  element: Element
   weapon: Weapon
   s1: {
-    name: string
-    img: string
+    en: string
+    ja: string
+    icon: string
     sp: number
   }
   s2: {
-    name: string
-    img: string
+    en: string
+    ja: string
+    icon: string
     sp: number
   }
-  haste: number
 }
 
 export interface Config {

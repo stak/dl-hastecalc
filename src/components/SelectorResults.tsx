@@ -12,7 +12,7 @@ const SelectorResults: React.FC<Props> = ({ all, onChange }) => {
     <ul className="SelectorResults">
       {all.map(adv => (
         <button
-          key={adv.name + adv.elemental + adv.weapon}
+          key={adv.en + adv.element + adv.weapon}
           onClick={() => onChange(adv)}
         >
           <SelectorResult adv={adv} />

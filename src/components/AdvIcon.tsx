@@ -12,10 +12,10 @@ const AdvIcon: React.FC<Props> = ({ adv, size }) => {
   size = size || FULL_SIZE
   return (
     <img
-      src={`${process.env.PUBLIC_URL}/img/adv/${adv.img}`}
+      src={`${process.env.PUBLIC_URL}/img/adv/${adv.img}.png`}
       width={size}
       height={size}
-      alt={adv.name}
+      alt={adv.ja}
     />
   )
 }

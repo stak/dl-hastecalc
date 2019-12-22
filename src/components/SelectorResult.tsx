@@ -1,6 +1,8 @@
 import React from 'react'
 import { Adv } from '../types'
 import AdvIcon from './AdvIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
 type Props = {
   adv: Adv
@@ -8,9 +10,12 @@ type Props = {
 
 const SelectorResult: React.FC<Props> = ({ adv }) => {
   return (
-    <div className="SelectorResult">
-      <AdvIcon adv={adv} size={80} />
-    </div>
+    <>
+      <ListItemIcon>
+        <AdvIcon adv={adv} size={80} />
+      </ListItemIcon>
+      <ListItemText primary={adv.en} secondary={adv.ja} />
+    </>
   )
 }
 

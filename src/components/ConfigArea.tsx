@@ -2,8 +2,6 @@ import React from 'react'
 import { Adv } from '../types'
 import { Config } from '../types'
 
-import './ConfigArea.css'
-
 type Props = {
   adv: Adv
   config: Config

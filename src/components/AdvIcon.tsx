@@ -15,7 +15,7 @@ const AdvIcon: React.FC<Props> = ({ adv, size }) => {
       src={`${process.env.PUBLIC_URL}/img/adv/${adv.img}.png`}
       width={size}
       height={size}
-      alt={adv.ja}
+      alt={adv.en}
     />
   )
 }

@@ -3,7 +3,6 @@ import ComboResult from './ComboResult'
 import { Adv } from '../types'
 import { Config } from '../types'
 import { solveFastestComboToSP } from '../solve'
-import './ComboArea.css'
 
 type Props = {
   adv: Adv

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Adv } from '../types'
 import AdvIcon from './AdvIcon'
-import './AdvArea.css'
 
 type Props = {
   adv: Adv
@@ -10,8 +9,8 @@ type Props = {
 
 const AdvArea: React.FC<Props> = ({ adv }) => {
   return (
-    <div className="AdvArea">
-      <div style={{ float: 'left' }}>
+    <div>
+      <div>
         <AdvIcon adv={adv} />
       </div>
       <div>{adv.ja}</div>

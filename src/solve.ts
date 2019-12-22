@@ -86,7 +86,8 @@ function makeFsCombo(base: ComboBase, config: Config): ComboCandidate[] {
 }
 
 function addHaste(base: ComboBase, config: Config): ComboBase {
-  const hasted: ComboBase = {}
+  let hasted: ComboBase = Object.assign({}, base)
+
   const actions: Action[] = ['x1', 'x2', 'x3', 'x4', 'x5', 'fs']
 
   for (let [k, v] of Object.entries(base)) {
@@ -94,12 +95,12 @@ function addHaste(base: ComboBase, config: Config): ComboBase {
       const composedHaste =
         k !== 'fs' ? config.haste : config.haste + config.hasteFS
 
-      hasted[k] = {
+      hasted[k as Action] = {
         ...v,
         sp: Math.ceil((v.sp * (100 + composedHaste)) / 100)
       }
     } else {
-      hasted[k] = v
+      hasted[k as Action] = v
     }
   }
 

@@ -1,9 +1,0 @@
-.ConfigArea {
-  border: #afa;
-  text-align: 'center';
-}
-
-.ConfigArea input, .ConfigArea button {
-  width: 32px;
-  font-size: 18px;
-}

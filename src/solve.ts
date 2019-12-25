@@ -119,37 +119,54 @@ export function solveFastestComboToSP(sp: number, config: Config): ComboData {
   if (config.useFS) {
     combos = [...combos, ...makeFsCombo(hastedData, config)]
   }
-  console.log(combos)
 
-  const minTime: number[] = Array(sp + 1)
-  const memoTime: number[] = Array(sp + 1)
+  const freeTime: number[] = Array(sp + 1)
   const memoCombo: string[] = Array(sp + 1)
-  minTime[0] = 0
-  memoTime[0] = 0
+  freeTime[0] = 0
   memoCombo[0] = ''
-  for (let i = 1; i <= sp; ++i) {
-    const timeList = combos.map(
-      combo =>
-        (i >= combo.gain ? memoTime[i - combo.gain] : memoTime[0]) +
-        combo.before
-    )
-    const min = Math.min.apply(null, timeList)
-    const winners = combos.filter((_, i) => timeList[i] === min)
-    const winner =
-      i === sp
-        ? winners.sort((a, b) => a.actions.length - b.actions.length)[0]
-        : winners.sort((a, b) => a.after - b.after)[0]
-    minTime[i] = min
-    memoTime[i] = min + winner.after
+
+  for (let i = 1; i < sp; ++i) {
+    let minFreeTime = Infinity
+    let freeWinner = combos[0]
+    for (let j = 0; j < combos.length; ++j) {
+      const combo = combos[j]
+      const t =
+        (i >= combo.gain ? freeTime[i - combo.gain] : 0) +
+        combo.before +
+        combo.after
+      if (t < minFreeTime) {
+        minFreeTime = t
+        freeWinner = combo
+      }
+    }
+    freeTime[i] = minFreeTime
     memoCombo[i] =
-      (i - winner.gain > 0 ? memoCombo[i - winner.gain] + ' ' : memoCombo[0]) +
-      winner.str
+      (i - freeWinner.gain > 0
+        ? memoCombo[i - freeWinner.gain] + ' '
+        : memoCombo[0]) + freeWinner.str
   }
 
+  const reachTimeCandidates: number[] = combos.map(
+    combo =>
+      (sp >= combo.gain ? freeTime[sp - combo.gain] : freeTime[0]) +
+      combo.before
+  )
+  const minReachTime = Math.min.apply(null, reachTimeCandidates)
+  const reachWinners = combos.filter(
+    (_, i) => reachTimeCandidates[i] === minReachTime
+  )
+  const reachWinner = reachWinners.sort(
+    (a, b) => a.actions.length - b.actions.length
+  )[0]
+  const reachCombo =
+    (sp - reachWinner.gain > 0
+      ? memoCombo[sp - reachWinner.gain] + ' '
+      : memoCombo[0]) + reachWinner.str
+
   return {
-    time: minTime[sp],
-    str: memoCombo[sp],
-    actions: memoCombo[sp].split(' ').reduce<Action[]>((cur, comboName) => {
+    time: minReachTime,
+    str: reachCombo,
+    actions: reachCombo.split(' ').reduce<Action[]>((cur, comboName) => {
       const comboAction = combos.find(combo => combo.str === comboName)?.actions
       return comboAction ? [...cur, ...comboAction] : cur
     }, []),

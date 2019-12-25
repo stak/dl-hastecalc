@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
   listMobile: {
     maxHeight: '300px',
-    overflowY: 'hidden',
+    overflowY: 'scroll',
     padding: 0
   },
   dense: {

@@ -70,7 +70,7 @@ const App: React.FC = () => {
       </Container>
       <Container component="main" maxWidth="lg">
         <Grid container spacing={3}>
-          <Grid item xs={12} md={4} className={classes.container}>
+          <Grid item xs={12} sm={12} md={4} className={classes.container}>
             <SelectorArea
               all={advData}
               onAdvChange={(adv: Adv) => {
@@ -79,17 +79,17 @@ const App: React.FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={12} md={8} className={classes.container}>
+          <Grid item xs={12} sm={12} md={8} className={classes.container}>
             <AdvArea adv={activeAdv} />
             <Grid container spacing={2}>
-              <Grid item xs={12} md={7}>
+              <Grid item xs={12} sm={8} md={7}>
                 <ConfigArea
                   adv={activeAdv}
                   config={config}
                   setConfig={setConfig}
                 />
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} sm={4} md={5}>
                 <ComboArea adv={activeAdv} config={config} />
               </Grid>
             </Grid>

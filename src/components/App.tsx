@@ -6,6 +6,8 @@ import ComboArea from './ComboArea'
 import advData from '../data/adv'
 import { Adv } from '../types'
 import { Config } from '../types'
+import githubIcon from '../img/github.png'
+import twitterIcon from '../img/twitter.png'
 
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -29,8 +31,18 @@ const useStyles = makeStyles({
     marginBottom: '1em'
   },
   title: {
+    marginTop: '2px',
     paddingLeft: '.5em',
     fontSize: '30px'
+  },
+  icons: {
+    textAlign: 'right',
+    paddingRight: '2.5em',
+    letterSpacing: '8px'
+  },
+  headerIcon: {
+    position: 'relative',
+    top: '5px'
   },
   container: {
     paddingBottom: '0 !important'
@@ -63,9 +75,37 @@ const App: React.FC = () => {
         className={classes.header}
       >
         <Container disableGutters maxWidth="lg">
-          <Typography component="h1" variant="h2" className={classes.title}>
-            Skill Haste Calculator
-          </Typography>
+          <Grid container>
+            <Grid item xs={8}>
+              <Typography component="h1" variant="h2" className={classes.title}>
+                Skill Haste Calculator
+              </Typography>
+            </Grid>
+            <Grid item xs={4} className={classes.icons}>
+              <a
+                href="https://twitter.com/areisgamer"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={twitterIcon}
+                  alt="twitter"
+                  className={classes.headerIcon}
+                />
+              </a>{' '}
+              <a
+                href="https://github.com/stak/dl-hastecalc/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={githubIcon}
+                  alt="github"
+                  className={classes.headerIcon}
+                />
+              </a>
+            </Grid>
+          </Grid>
         </Container>
       </Container>
       <Container component="main" maxWidth="lg">

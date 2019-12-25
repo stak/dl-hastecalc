@@ -1,6 +1,6 @@
 {
-  "short_name": "spsim",
-  "name": "DragaliaLost spsim",
+  "short_name": "dl-hastecalc",
+  "name": "Skill Haste Calculator for Dragalia Lost",
   "icons": [
     {
       "src": "favicon.ico",

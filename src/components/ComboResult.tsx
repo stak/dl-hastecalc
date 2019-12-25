@@ -19,6 +19,10 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'space-between'
+  },
+  combo: {
+    fontFamily: 'Voces',
+    fontSize: '16pt'
   }
 })
 
@@ -40,7 +44,7 @@ const ComboResult: React.FC<Props> = ({ title, result }) => {
         </Typography>
       </CardContent>
       <CardContent>
-        <Typography component="span" variant="body1">
+        <Typography component="span" className={classes.combo}>
           {result.str}
         </Typography>
       </CardContent>

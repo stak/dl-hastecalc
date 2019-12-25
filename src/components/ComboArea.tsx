@@ -29,8 +29,8 @@ const ComboArea: React.FC<Props> = ({ adv, config }) => {
   }
   return (
     <Paper className={classes.trans}>
-      <ComboResult title="s1 only" result={results.s1} />
-      <ComboResult title="s2 only" result={results.s2} />
+      <ComboResult title="s1" result={results.s1} />
+      <ComboResult title="s2" result={results.s2} />
     </Paper>
   )
 }

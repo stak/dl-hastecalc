@@ -306,8 +306,8 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
     'weapon',
     'adv',
     'buff',
-    'advStrike',
-    'printsStrike'
+    'printsStrike',
+    'advStrike'
   ]
   const sliderState: State = {} as any
   for (let i = 0; i < hasteVars.length; ++i) {
@@ -438,7 +438,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
             const option = sliderOption[varName]
 
             return (
-              <>
+              <React.Fragment key={varName}>
                 <Grid item xs={3} className={classes.sliders}>
                   <Typography variant="body2" className={classes.sliderLabel}>
                     {option.label}
@@ -454,7 +454,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
                     onChange={handleSliderChange.bind(null, varName)}
                   />
                 </Grid>
-              </>
+              </React.Fragment>
             )
           })}
         </Grid>
@@ -487,7 +487,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
             const option = sliderOption[varName]
 
             return (
-              <>
+              <React.Fragment key={varName}>
                 <Grid item xs={3} className={classes.sliders}>
                   <Typography variant="body2" className={classes.sliderLabel}>
                     {option.label}
@@ -503,7 +503,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
                     onChange={handleSliderChange.bind(null, varName)}
                   />
                 </Grid>
-              </>
+              </React.Fragment>
             )
           })}
         </Grid>

@@ -82,14 +82,14 @@ const App: React.FC = () => {
           <Grid item xs={12} md={8} className={classes.container}>
             <AdvArea adv={activeAdv} />
             <Grid container spacing={2}>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={7}>
                 <ConfigArea
                   adv={activeAdv}
                   config={config}
                   setConfig={setConfig}
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={5}>
                 <ComboArea adv={activeAdv} config={config} />
               </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Adv } from '../types'
 import { Config } from '../types'
 
@@ -14,133 +14,236 @@ import Divider from '@material-ui/core/Divider'
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
-const marks = {
-  wyrmprintHaste: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 6,
-      label: '6%'
-    },
-    {
-      value: 8,
-      label: '8%'
-    },
-    {
-      value: 15,
-      label: '15%'
-    }
-  ],
-  wyrmprintStrike: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 10,
-      label: '10%'
-    },
-    {
-      value: 12,
-      label: '12%'
-    },
-    {
-      value: 15,
-      label: '15%'
-    }
-  ],
-  dragonHaste: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 25,
-      label: '25%'
-    },
-    {
-      value: 35,
-      label: '35%'
-    }
-  ],
-  weaponHaste: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 4,
-      label: '4%'
-    },
-    {
-      value: 5,
-      label: '5%'
-    }
-  ],
-  advHaste: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 5,
-      label: '5%'
-    },
-    {
-      value: 8,
-      label: '8%'
-    },
-    {
-      value: 10,
-      label: '10%'
-    },
-    {
-      value: 15,
-      label: '15%'
-    }
-  ],
-  advStrike: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 12,
-      label: '12%'
-    },
-    {
-      value: 15,
-      label: '15%'
-    }
-  ],
-  buffHaste: [
-    {
-      value: 0,
-      label: '0%'
-    },
-    {
-      value: 10,
-      label: '10%'
-    },
-    {
-      value: 20,
-      label: '20%'
-    },
-    {
-      value: 30,
-      label: '30%'
-    },
-    {
-      value: 40,
-      label: '40%'
-    },
-    {
-      value: 50,
-      label: '50%'
-    }
-  ]
+type HasteName =
+  | 'prints'
+  | 'co'
+  | 'dragon'
+  | 'weapon'
+  | 'adv'
+  | 'buff'
+  | 'advStrike'
+  | 'printsStrike'
+type MarkObject = {
+  value: number
+  label: string
+}
+
+const sliderOption: {
+  [key in HasteName]: {
+    label: string
+    max: number
+    step: number | null
+    marks: MarkObject[]
+  }
+} = {
+  prints: {
+    label: 'Wyrmprints',
+    max: 15,
+    step: 1,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 6,
+        label: '6%'
+      },
+      {
+        value: 8,
+        label: '8%'
+      },
+      {
+        value: 15,
+        label: '15%'
+      }
+    ]
+  },
+  dragon: {
+    label: 'Dragon',
+    max: 35,
+    step: null,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 25,
+        label: '25%'
+      },
+      {
+        value: 35,
+        label: '35%'
+      }
+    ]
+  },
+  weapon: {
+    label: 'Weapon',
+    max: 5,
+    step: null,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 4,
+        label: '4%'
+      },
+      {
+        value: 5,
+        label: '5%'
+      }
+    ]
+  },
+  adv: {
+    label: 'Adventurer',
+    max: 15,
+    step: 1,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 5,
+        label: '5%'
+      },
+      {
+        value: 8,
+        label: '8%'
+      },
+      {
+        value: 10,
+        label: '10%'
+      },
+      {
+        value: 15,
+        label: '15%'
+      }
+    ]
+  },
+  buff: {
+    label: 'Buff',
+    max: 50,
+    step: 1,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 10,
+        label: '10%'
+      },
+      {
+        value: 20,
+        label: '20%'
+      },
+      {
+        value: 30,
+        label: '30%'
+      },
+      {
+        value: 40,
+        label: '40%'
+      },
+      {
+        value: 50,
+        label: '50%'
+      }
+    ]
+  },
+  co: {
+    label: 'Co-ability',
+    max: 15,
+    step: null,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 2,
+        label: '2%'
+      },
+      {
+        value: 3,
+        label: '3%'
+      },
+      {
+        value: 5,
+        label: '5%'
+      },
+      {
+        value: 6,
+        label: '6%'
+      },
+      {
+        value: 8,
+        label: '8%'
+      },
+      {
+        value: 9,
+        label: '9%'
+      },
+      {
+        value: 11,
+        label: '11%'
+      },
+      {
+        value: 12,
+        label: '12%'
+      },
+      {
+        value: 15,
+        label: '15%'
+      }
+    ]
+  },
+  advStrike: {
+    label: 'Adventurer',
+    max: 15,
+    step: 1,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 12,
+        label: '12%'
+      },
+      {
+        value: 15,
+        label: '15%'
+      }
+    ]
+  },
+  printsStrike: {
+    label: 'Wyrmprints',
+    max: 15,
+    step: 1,
+    marks: [
+      {
+        value: 0,
+        label: '0%'
+      },
+      {
+        value: 10,
+        label: '10%'
+      },
+      {
+        value: 12,
+        label: '12%'
+      },
+      {
+        value: 15,
+        label: '15%'
+      }
+    ]
+  }
 }
 
 const useStyles = makeStyles({
@@ -169,6 +272,10 @@ const useStyles = makeStyles({
   sliders: {
     padding: '0 10px 0 10px'
   },
+  sliderLabel: {
+    lineHeight: 2,
+    textAlign: 'right'
+  },
   divider: {
     margin: '4px 0 6px 0'
   }
@@ -180,21 +287,123 @@ type Props = {
   setConfig: React.Dispatch<React.SetStateAction<Config>>
 }
 
+type State = {
+  [key in HasteName]: { value: number; setter: any }
+}
+
 const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
   const classes = useStyles()
   const isMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
   const listClass = isMobile ? classes['configMobile'] : classes['config']
 
+  const hasteVars: HasteName[] = [
+    'prints',
+    'co',
+    'dragon',
+    'weapon',
+    'adv',
+    'buff',
+    'advStrike',
+    'printsStrike'
+  ]
+  const sliderState: State = {} as any
+  for (let i = 0; i < hasteVars.length; ++i) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [value, setter] = useState(0)
+    sliderState[hasteVars[i]] = {
+      value,
+      setter
+    }
+  }
+
+  const handleSliderChange = (
+    varName: HasteName,
+    event: any,
+    newValue: number | number[]
+  ) => {
+    sliderState[varName].setter(newValue)
+    setConfig({
+      ...config,
+      haste: calcTotalHaste({
+        ...sliderState,
+        [varName]: {
+          value: newValue
+        }
+      }),
+      hasteFS: calcTotalStrike({
+        ...sliderState,
+        [varName]: {
+          value: newValue
+        }
+      })
+    })
+  }
+
+  const calcTotalHaste = (state: State) =>
+    hasteVars.reduce(
+      (sum, varName) =>
+        varName.indexOf('Strike') < 0 ? sum + state[varName].value : sum,
+      0
+    )
+  const calcTotalStrike = (state: State) =>
+    hasteVars.reduce(
+      (sum, varName) =>
+        varName.indexOf('Strike') >= 0 ? sum + state[varName].value : sum,
+      0
+    )
+
   return (
     <Paper className={listClass}>
       <FormGroup className={classes.formGroup}>
         <FormControlLabel
-          control={<Checkbox checked={true} onChange={() => {}} />}
-          label="Use FS / バーストあり"
+          control={
+            <Checkbox
+              checked={config.useFS}
+              onChange={() => {
+                setConfig({
+                  ...config,
+                  useFS: !config.useFS
+                })
+              }}
+            />
+          }
+          label={
+            <Typography variant="body1">
+              Use FS{' '}
+              <Typography
+                component="span"
+                variant="body2"
+                color="textSecondary"
+              >
+                バースト使用
+              </Typography>
+            </Typography>
+          }
         />
         <FormControlLabel
-          control={<Checkbox checked={true} onChange={() => {}} />}
-          label="Use FSF / バーストキャンセルあり"
+          control={
+            <Checkbox
+              checked={config.useFSF}
+              onChange={() => {
+                setConfig({
+                  ...config,
+                  useFSF: !config.useFSF
+                })
+              }}
+            />
+          }
+          label={
+            <Typography variant="body1">
+              Use FSF{' '}
+              <Typography
+                component="span"
+                variant="body2"
+                color="textSecondary"
+              >
+                バーストキャンセル使用
+              </Typography>
+            </Typography>
+          }
         />
         <Divider variant="middle" className={classes.divider} />
         <Grid container>
@@ -213,95 +422,36 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
           </Grid>
           <Grid item xs={3}>
             <Typography gutterBottom component="h4" variant="h5" align="right">
-              23%
+              {calcTotalHaste(sliderState)}%
             </Typography>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Wyrmprint
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={15}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.wyrmprintHaste}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Co-ability
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={15}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.advHaste}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Dragon
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={35}
-              step={null}
-              valueLabelDisplay="auto"
-              marks={marks.dragonHaste}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Weapon
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={5}
-              step={null}
-              valueLabelDisplay="auto"
-              marks={marks.weaponHaste}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Adv
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={15}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.advHaste}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom align="right">
-              Buff
-            </Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={50}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.buffHaste}
-            />
-          </Grid>
+          {hasteVars.map(varName => {
+            if (varName.indexOf('Strike') >= 0) return null
+            const state = sliderState[varName]
+            const option = sliderOption[varName]
+
+            return (
+              <>
+                <Grid item xs={3} className={classes.sliders}>
+                  <Typography variant="body2" className={classes.sliderLabel}>
+                    {option.label}
+                  </Typography>
+                </Grid>
+                <Grid item xs={9} className={classes.sliders}>
+                  <Slider
+                    value={state.value}
+                    max={option.max}
+                    step={option.step}
+                    valueLabelDisplay="auto"
+                    marks={option.marks}
+                    onChange={handleSliderChange.bind(null, varName)}
+                  />
+                </Grid>
+              </>
+            )
+          })}
         </Grid>
 
         <Divider variant="middle" className={classes.divider} />
@@ -321,77 +471,40 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
           </Grid>
           <Grid item xs={3}>
             <Typography gutterBottom component="h4" variant="h5" align="right">
-              0%
+              {calcTotalStrike(sliderState)}%
             </Typography>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom>Wyrmprint</Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={15}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.wyrmprintStrike}
-            />
-          </Grid>
-          <Grid item xs={3} className={classes.sliders}>
-            <Typography gutterBottom>Adv</Typography>
-          </Grid>
-          <Grid item xs={9} className={classes.sliders}>
-            <Slider
-              defaultValue={0}
-              max={15}
-              step={1}
-              valueLabelDisplay="auto"
-              marks={marks.advStrike}
-            />
-          </Grid>
+          {hasteVars.map(varName => {
+            if (varName.indexOf('Strike') < 0) return null
+            const state = sliderState[varName]
+            const option = sliderOption[varName]
+
+            return (
+              <>
+                <Grid item xs={3} className={classes.sliders}>
+                  <Typography variant="body2" className={classes.sliderLabel}>
+                    {option.label}
+                  </Typography>
+                </Grid>
+                <Grid item xs={9} className={classes.sliders}>
+                  <Slider
+                    value={state.value}
+                    max={option.max}
+                    step={option.step}
+                    valueLabelDisplay="auto"
+                    marks={option.marks}
+                    onChange={handleSliderChange.bind(null, varName)}
+                  />
+                </Grid>
+              </>
+            )
+          })}
         </Grid>
       </FormGroup>
     </Paper>
   )
-  /*
-      <div>
-        Skill Haste{' '}
-        <input id="skillHaste" type="text" value={config.haste} readOnly />
-        <button
-          onClick={() => {
-            setConfig(prev => ({ ...prev, haste: prev.haste + 1 }))
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            setConfig(prev => ({ ...prev, haste: prev.haste - 1 }))
-          }}
-        >
-          -
-        </button>
-      </div>
-      <div>
-        Striking Haste{' '}
-        <input id="strikingHaste" type="text" value={config.hasteFS} readOnly />
-        <button
-          onClick={() => {
-            setConfig(prev => ({ ...prev, hasteFS: prev.hasteFS + 1 }))
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            setConfig(prev => ({ ...prev, hasteFS: prev.hasteFS - 1 }))
-          }}
-        >
-          -
-        </button>
-      </div>
-      */
 }
 
 export default ConfigArea

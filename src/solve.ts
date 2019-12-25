@@ -26,7 +26,7 @@ function makeStdCombo(base: ComboBase): ComboCandidate[] {
   for (let i = 1; i <= 5; ++i) {
     const action = `x${i}` as Action
     c[i] = {
-      str: `c${i}`,
+      str: `c${i}_`,
       actions: [...c[i - 1].actions, action],
       before: c[i - 1].before + c[i - 1].after + base[action].startup,
       after: base[action].recovery,
@@ -55,7 +55,7 @@ function makeFsfCombo(base: ComboBase, config: Config): ComboCandidate[] {
         : 0
     return {
       ...combo,
-      str: combo.str + '_',
+      str: combo.str.slice(0, -1),
       after: rollLatency + config.latencyFSF + base.fsf.recovery,
       actions: [...combo.actions, 'fsf']
     }
@@ -76,7 +76,7 @@ function makeFsCombo(base: ComboBase, config: Config): ComboCandidate[] {
         ? (i + 1) * FRAME_TO_ROLL + base.fs.startup - combo.before
         : 0
     return {
-      str: combo.str + 'fs',
+      str: combo.str.slice(0, -1) + 'fs',
       actions: [...combo.actions, 'fs'],
       before: combo.before + rollLatency + config.latencyFS + 1,
       after: base.fs.recovery,
@@ -110,6 +110,7 @@ function addHaste(base: ComboBase, config: Config): ComboBase {
 export function solveFastestComboToSP(sp: number, config: Config): ComboData {
   const baseData = weaponCombos[config.weapon]
   const hastedData = addHaste(baseData, config)
+
   let combos: ComboCandidate[] = []
   combos = [...combos, ...makeStdCombo(hastedData)]
   if (config.useFSF) {

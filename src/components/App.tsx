@@ -23,6 +23,16 @@ const theme = createMuiTheme({
     }
   }
 })
+const useStyles = makeStyles({
+  header: {
+    backgroundColor: '#fafafa',
+    marginBottom: '1em'
+  },
+  title: {
+    paddingLeft: '.5em',
+    fontSize: '30px'
+  }
+})
 
 const initialConfig: Config = {
   weapon: advData[0].weapon,
@@ -34,17 +44,6 @@ const initialConfig: Config = {
   latencyFS: 0,
   latencyFSF: 0
 }
-
-const useStyles = makeStyles({
-  header: {
-    borderBottom: '1px solid #ccc',
-    backgroundColor: '#f3f0f6',
-    marginBottom: '1em'
-  },
-  title: {
-    fontSize: '30px'
-  }
-})
 
 const App: React.FC = () => {
   const [activeAdv, setActiveAdv] = useState(advData[0])
@@ -77,12 +76,20 @@ const App: React.FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={6} md={4}>
+          <Grid item xs={12} md={8}>
             <AdvArea adv={activeAdv} />
-            <ConfigArea adv={activeAdv} config={config} setConfig={setConfig} />
-          </Grid>
-          <Grid item xs={6} md={4}>
-            <ComboArea adv={activeAdv} config={config} />
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8}>
+                <ConfigArea
+                  adv={activeAdv}
+                  config={config}
+                  setConfig={setConfig}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <ComboArea adv={activeAdv} config={config} />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>

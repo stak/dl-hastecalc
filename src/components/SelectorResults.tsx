@@ -11,11 +11,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 const useStyles = makeStyles(theme => ({
   list: {
     maxHeight: 'calc(100vh - 220px)',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    padding: 0
   },
   listMobile: {
     maxHeight: '300px',
-    overflowY: 'hidden'
+    overflowY: 'hidden',
+    padding: 0
   },
   dense: {
     paddingTop: 0,

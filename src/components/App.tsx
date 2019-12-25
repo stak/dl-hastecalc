@@ -31,6 +31,9 @@ const useStyles = makeStyles({
   title: {
     paddingLeft: '.5em',
     fontSize: '30px'
+  },
+  container: {
+    paddingBottom: '0 !important'
   }
 })
 
@@ -66,8 +69,8 @@ const App: React.FC = () => {
         </Container>
       </Container>
       <Container component="main" maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4} className={classes.container}>
             <SelectorArea
               all={advData}
               onAdvChange={(adv: Adv) => {
@@ -76,7 +79,7 @@ const App: React.FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={8} className={classes.container}>
             <AdvArea adv={activeAdv} />
             <Grid container spacing={2}>
               <Grid item xs={12} md={8}>

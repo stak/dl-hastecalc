@@ -253,7 +253,7 @@ const useStyles = makeStyles({
     marginTop: '1em',
     borderRadius: 0,
     boxShadow: '3px 3px 0px 0px rgba(0,0,0,0.3)',
-    maxHeight: 'calc(100vh - 240px)',
+    maxHeight: 'calc(100vh - 220px)',
     overflowY: 'auto'
   },
   configMobile: {
@@ -269,6 +269,9 @@ const useStyles = makeStyles({
     marginLeft: '2em',
     marginRight: '2em'
   },
+  checkbox: {
+    width: '90%'
+  },
   sliders: {
     padding: '0 10px 0 10px'
   },
@@ -277,7 +280,7 @@ const useStyles = makeStyles({
     textAlign: 'right'
   },
   divider: {
-    margin: '4px 0 6px 0'
+    margin: '4px 0 9px 0'
   }
 })
 
@@ -356,6 +359,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
     <Paper className={listClass}>
       <FormGroup className={classes.formGroup}>
         <FormControlLabel
+          className={classes.checkbox}
           control={
             <Checkbox
               checked={config.useFS}
@@ -381,6 +385,7 @@ const ConfigArea: React.FC<Props> = ({ adv, config, setConfig }) => {
           }
         />
         <FormControlLabel
+          className={classes.checkbox}
           control={
             <Checkbox
               checked={config.useFSF}

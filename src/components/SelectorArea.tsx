@@ -21,9 +21,16 @@ const useStyles = makeStyles({
   grow: {
     flexGrow: 1,
     minWidth: 0,
-    border: 0
+    border: 0,
+    height: '46px'
   },
-  solid: {
+  filter: {
+    borderRadius: 0,
+    boxShadow: '3px 3px 0px 0px rgba(0,0,0,0.3)',
+    marginBottom: '1em',
+    marginTop: '2px'
+  },
+  result: {
     borderRadius: 0,
     boxShadow: '3px 3px 0px 0px rgba(0,0,0,0.3)',
     marginBottom: '1em'
@@ -72,7 +79,7 @@ const SelectorArea: React.FC<Props> = ({ all, onAdvChange }) => {
 
   return (
     <>
-      <Paper className={classes.solid}>
+      <Paper className={classes.filter}>
         <ToggleButtonGroup
           value={condStars}
           onChange={handleStars}
@@ -143,7 +150,7 @@ const SelectorArea: React.FC<Props> = ({ all, onAdvChange }) => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Paper>
-      <Paper className={classes.solid}>
+      <Paper className={classes.result}>
         <SelectorResults advs={filtered} onChange={onAdvChange} />
       </Paper>
     </>

@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   header: {
     paddingTop: '0.2em',
     paddingBottom: '0.3em',
-    backgroundColor: '#ccc',
+    backgroundColor: 'rgba(0,0,0,0.14)',
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'space-between'

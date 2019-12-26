@@ -13,7 +13,15 @@ const allAdvs: Adv[] = csvAdvs
     ...adv,
     img: adv.img || adv.en,
     element: adv.element.slice(1),
-    weapon: adv.weapon.slice(1)
+    weapon: adv.weapon.slice(1),
+    s1: {
+      ...adv.s1,
+      exclude: !!adv.s1.exclude
+    },
+    s2: {
+      ...adv.s2,
+      exclude: !!adv.s2.exclude
+    }
   }))
 
 function constructDottedKeyObject(src: { [key: string]: any }) {

@@ -23,14 +23,30 @@ type Props = {
 
 const ComboArea: React.FC<Props> = ({ adv, config }) => {
   const classes = useStyles()
-  const results = {
-    s1: solveFastestComboToSP(adv.s1.sp, config),
-    s2: solveFastestComboToSP(adv.s2.sp, config)
+  const results = []
+
+  if (!adv.s1.exclude) {
+    results.push({
+      title: 's1',
+      detail: solveFastestComboToSP(adv.s1.sp, config)
+    })
   }
+  if (!adv.s2.exclude) {
+    results.push({
+      title: 's2',
+      detail: solveFastestComboToSP(adv.s2.sp, config)
+    })
+  }
+
   return (
     <Paper className={classes.trans}>
-      <ComboResult title="s1" result={results.s1} />
-      <ComboResult title="s2" result={results.s2} />
+      {results.map(result => (
+        <ComboResult
+          key={result.title}
+          title={result.title}
+          result={result.detail}
+        />
+      ))}
     </Paper>
   )
 }

@@ -17,6 +17,7 @@ export interface AdvSkill {
   ja: string
   icon: string
   sp: number
+  exclude: boolean
 }
 
 export interface Adv {
